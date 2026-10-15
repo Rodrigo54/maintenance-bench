@@ -1,0 +1,9 @@
+# Saída do build (dotnet build gera de novo)
+bin/
+obj/
+mod/maintenance-bench/Assemblies/
+
+node_modules/
+.vs/
+*.user
+.env

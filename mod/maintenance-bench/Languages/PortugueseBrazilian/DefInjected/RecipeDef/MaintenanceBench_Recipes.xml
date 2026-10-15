@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MaintenanceBench_BasicRepair.label>reparo simples</MaintenanceBench_BasicRepair.label>
+  <MaintenanceBench_BasicRepair.description>Conserta no lugar uma arma ou roupa danificada, devolvendo até 25% dos pontos de vida máximos por execução. Custa só tempo. Cada execução tem uma pequena chance de subir a qualidade do item em um nível, até obra-prima.</MaintenanceBench_BasicRepair.description>
+  <MaintenanceBench_BasicRepair.jobString>Reparando.</MaintenanceBench_BasicRepair.jobString>
+
+  <MaintenanceBench_AdvancedRepair.label>reparo avançado</MaintenanceBench_AdvancedRepair.label>
+  <MaintenanceBench_AdvancedRepair.description>Conserta no lugar uma arma ou roupa danificada, devolvendo até 75% dos pontos de vida máximos por execução. Consome um componente. Cada execução tem uma chance de subir a qualidade do item em um nível, até obra-prima.</MaintenanceBench_AdvancedRepair.description>
+  <MaintenanceBench_AdvancedRepair.jobString>Reparando.</MaintenanceBench_AdvancedRepair.jobString>
+
+  <MaintenanceBench_ImproveItem.label>melhoria de item</MaintenanceBench_ImproveItem.label>
+  <MaintenanceBench_ImproveItem.description>Trabalha no lugar uma arma ou roupa sem dano, com chance de subir sua qualidade em um nível. Consome dois componentes. Os itens de pior qualidade são trabalhados primeiro, e um item recém-trabalhado espera uma hora antes de outra tentativa, para a tarefa passar aos demais. Chegar a lendário exige um artesão com a inspiração artista, que é consumida, ou com o papel de especialista em produção.</MaintenanceBench_ImproveItem.description>
+  <MaintenanceBench_ImproveItem.jobString>Melhorando.</MaintenanceBench_ImproveItem.jobString>
+
+  <MaintenanceBench_Recycle.label>reciclagem</MaintenanceBench_Recycle.label>
+  <MaintenanceBench_Recycle.description>Desmonta uma arma ou roupa danificada (por padrão, com 25% dos pontos de vida ou menos), devolvendo parte dos materiais de fabricação. Um artesão habilidoso recupera mais. Componentes nunca são devolvidos.</MaintenanceBench_Recycle.description>
+  <MaintenanceBench_Recycle.jobString>Reciclando.</MaintenanceBench_Recycle.jobString>
+
+  <MaintenanceBench_RemoveBiocode.label>remoção de biocodificação</MaintenanceBench_RemoveBiocode.label>
+  <MaintenanceBench_RemoveBiocode.description>Remove no lugar a biocodificação de uma arma ou roupa, para que qualquer um da colônia possa usá-la. Consome três componentes. Armas persona não podem ser processadas: remover o código delas desfaria o vínculo.</MaintenanceBench_RemoveBiocode.description>
+  <MaintenanceBench_RemoveBiocode.jobString>Removendo biocodificação.</MaintenanceBench_RemoveBiocode.jobString>
+
+</LanguageData>

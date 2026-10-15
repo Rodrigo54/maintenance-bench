@@ -1,0 +1,13 @@
+<Project>
+
+  <!-- Lê RIMWORLD_PATH do .env quando ele não vem do ambiente: o `bun run` não repassa o .env aos scripts,
+       e assim o build funciona igual pelo Bun, pela IDE ou pelo dotnet direto. -->
+  <PropertyGroup Condition="'$(RIMWORLD_PATH)' == '' And Exists('$(MSBuildThisFileDirectory).env')">
+    <RIMWORLD_PATH>$([System.Text.RegularExpressions.Regex]::Match($([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory).env')), '(?m)^RIMWORLD_PATH=(.*?)\s*$').Groups[1].Value)</RIMWORLD_PATH>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(HARMONY_PATH)' == '' And Exists('$(MSBuildThisFileDirectory).env')">
+    <HARMONY_PATH>$([System.Text.RegularExpressions.Regex]::Match($([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory).env')), '(?m)^HARMONY_PATH=(.*?)\s*$').Groups[1].Value)</HARMONY_PATH>
+  </PropertyGroup>
+
+</Project>

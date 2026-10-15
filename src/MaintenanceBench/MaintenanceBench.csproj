@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>MaintenanceBench</RootNamespace>
+    <!-- O jogo carrega todo .dll de Assemblies; só o DLL do mod vai para lá. -->
+    <OutputPath>$(MSBuildThisFileDirectory)..\..\mod\maintenance-bench\Assemblies\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <!-- RIMWORLD_PATH vem do ambiente ou do .env (ver Directory.Build.props). -->
+  <Target Name="RequireRimWorldPath" BeforeTargets="ResolveAssemblyReferences">
+    <Error Condition="'$(RIMWORLD_PATH)' == ''" Text="RIMWORLD_PATH não definido. Copie .env.example para .env." />
+    <Error Condition="!Exists('$(RIMWORLD_PATH)\Assembly-CSharp.dll')" Text="Assembly-CSharp.dll não encontrado em $(RIMWORLD_PATH)." />
+    <Error Condition="!Exists('$(HARMONY_PATH)\0Harmony.dll')" Text="0Harmony.dll não encontrado em HARMONY_PATH ($(HARMONY_PATH)). Veja .env.example." />
+  </Target>
+
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(RIMWORLD_PATH)\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <!-- Fornecido em jogo pelo mod Harmony (dependência no About.xml); não vai para Assemblies. -->
+    <Reference Include="0Harmony">
+      <HintPath>$(HARMONY_PATH)\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityStubs">
+      <HintPath>$(RIMWORLD_PATH)\UnityStubs.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>

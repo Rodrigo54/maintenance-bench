@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Sem este def nenhum colono trabalha na bancada: é ele que a liga a um tipo de trabalho. -->
+  <WorkGiverDef>
+    <defName>DoBillsMaintenanceBench</defName>
+    <label>maintain gear at maintenance bench</label>
+    <giverClass>WorkGiver_DoBill</giverClass>
+    <workType>Crafting</workType>
+    <priorityInType>105</priorityInType>
+    <fixedBillGiverDefs>
+      <li>MaintenanceBench</li>
+    </fixedBillGiverDefs>
+    <verb>work at</verb>
+    <gerund>working at</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+
+</Defs>

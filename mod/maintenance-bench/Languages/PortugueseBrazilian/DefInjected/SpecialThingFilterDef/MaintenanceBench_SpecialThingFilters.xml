@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Usados só nos filtros fixos das receitas; não aparecem na interface. -->
+
+  <MaintenanceBench_AllowWeaponsWithoutQuality.label>permitir armas sem qualidade</MaintenanceBench_AllowWeaponsWithoutQuality.label>
+  <MaintenanceBench_AllowApparelWithoutQuality.label>permitir roupas sem qualidade</MaintenanceBench_AllowApparelWithoutQuality.label>
+
+  <MaintenanceBench_AllowRecentlyImprovedWeapons.label>permitir armas trabalhadas há pouco</MaintenanceBench_AllowRecentlyImprovedWeapons.label>
+  <MaintenanceBench_AllowRecentlyImprovedApparel.label>permitir roupas trabalhadas há pouco</MaintenanceBench_AllowRecentlyImprovedApparel.label>
+
+  <MaintenanceBench_AllowWeaponsOutsideImprovementTier.label>permitir armas fora do nível de qualidade da busca de melhoria</MaintenanceBench_AllowWeaponsOutsideImprovementTier.label>
+  <MaintenanceBench_AllowApparelOutsideImprovementTier.label>permitir roupas fora do nível de qualidade da busca de melhoria</MaintenanceBench_AllowApparelOutsideImprovementTier.label>
+
+  <MaintenanceBench_AllowWeaponsWithoutReturnableCost.label>permitir armas sem material a devolver</MaintenanceBench_AllowWeaponsWithoutReturnableCost.label>
+  <MaintenanceBench_AllowApparelWithoutReturnableCost.label>permitir roupas sem material a devolver</MaintenanceBench_AllowApparelWithoutReturnableCost.label>
+
+</LanguageData>

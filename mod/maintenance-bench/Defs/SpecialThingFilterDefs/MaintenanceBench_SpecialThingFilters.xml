@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Usados só nos filtros fixos das receitas; não aparecem na interface. -->
+
+  <!-- Melhoria de item: item sem qualidade. -->
+  <SpecialThingFilterDef>
+    <defName>MaintenanceBench_AllowWeaponsWithoutQuality</defName>
+    <label>allow weapons without quality</label>
+    <parentCategory>Weapons</parentCategory>
+    <allowedByDefault>true</allowedByDefault>
+    <configurable>false</configurable>
+    <saveKey>maintenanceBenchAllowWeaponsWithoutQuality</saveKey>
+    <workerClass>MaintenanceBench.SpecialThingFilterWorker_WithoutQuality</workerClass>
+  </SpecialThingFilterDef>
+
+  <SpecialThingFilterDef>
+    <defName>MaintenanceBench_AllowApparelWithoutQuality</defName>
+    <label>allow apparel without quality</label>
+    <parentCategory>Apparel</parentCategory>
+    <allowedByDefault>true</allowedByDefault>
+    <configurable>false</configurable>
+    <saveKey>maintenanceBenchAllowApparelWithoutQuality</saveKey>
+    <workerClass>MaintenanceBench.SpecialThingFilterWorker_WithoutQuality</workerClass>
+  </SpecialThingFilterDef>
+
+  <!-- Melhoria de item: item que acabou de passar por uma tentativa. -->
+  <SpecialThingFilterDef>
+    <defName>MaintenanceBench_AllowRecentlyImprovedWeapons</defName>
+    <label>allow recently improved weapons</label>
+    <parentCategory>Weapons</parentCategory>
+    <allowedByDefault>true</allowedByDefault>
+    <configurable>false</configurable>
+    <saveKey>maintenanceBenchAllowRecentlyImprovedWeapons</saveKey>
+    <workerClass>MaintenanceBench.SpecialThingFilterWorker_RecentlyImproved</workerClass>
+  </SpecialThingFilterDef>
+
+  <SpecialThingFilterDef>
+    <defName>MaintenanceBench_AllowRecentlyImprovedApparel</defName>
+    <label>allow recently improved apparel</label>
+    <parentCategory>Apparel</parentCategory>
+    <allowedByDefault>true</allowedByDefault>
+    <configurable>false</configurable>
+    <saveKey>maintenanceBenchAllowRecentlyImprovedApparel</saveKey>
+    <workerClass>MaintenanceBench.SpecialThingFilterWorker_RecentlyImproved</workerClass>
+  </SpecialThingFilterDef>
+
+  <!-- Melhoria de item: item fora do nível de qualidade que a busca de ingredientes está percorrendo. -->
+  <SpecialThingFilterDef>
+    <defName>MaintenanceBench_AllowWeaponsOutsideImprovementTier</defName>
+    <label>allow weapons outside the improvement search tier</label>
+    <parentCategory>Weapons</parentCategory>
+    <allowedByDefault>true</allowedByDefault>
+    <configurable>false</configurable>
+    <saveKey>maintenanceBenchAllowWeaponsOutsideImprovementTier</saveKey>
+    <workerClass>MaintenanceBench.SpecialThingFilterWorker_OutsideImprovementTier</workerClass>
+  </SpecialThingFilterDef>
+
+  <SpecialThingFilterDef>
+    <defName>MaintenanceBench_AllowApparelOutsideImprovementTier</defName>
+    <label>allow apparel outside the improvement search tier</label>
+    <parentCategory>Apparel</parentCategory>
+    <allowedByDefault>true</allowedByDefault>
+    <configurable>false</configurable>
+    <saveKey>maintenanceBenchAllowApparelOutsideImprovementTier</saveKey>
+    <workerClass>MaintenanceBench.SpecialThingFilterWorker_OutsideImprovementTier</workerClass>
+  </SpecialThingFilterDef>
+
+  <!-- Reciclagem: item sem material a devolver. -->
+  <SpecialThingFilterDef>
+    <defName>MaintenanceBench_AllowWeaponsWithoutReturnableCost</defName>
+    <label>allow weapons without returnable cost</label>
+    <parentCategory>Weapons</parentCategory>
+    <allowedByDefault>true</allowedByDefault>
+    <configurable>false</configurable>
+    <saveKey>maintenanceBenchAllowWeaponsWithoutReturnableCost</saveKey>
+    <workerClass>MaintenanceBench.SpecialThingFilterWorker_WithoutReturnableCost</workerClass>
+  </SpecialThingFilterDef>
+
+  <SpecialThingFilterDef>
+    <defName>MaintenanceBench_AllowApparelWithoutReturnableCost</defName>
+    <label>allow apparel without returnable cost</label>
+    <parentCategory>Apparel</parentCategory>
+    <allowedByDefault>true</allowedByDefault>
+    <configurable>false</configurable>
+    <saveKey>maintenanceBenchAllowApparelWithoutReturnableCost</saveKey>
+    <workerClass>MaintenanceBench.SpecialThingFilterWorker_WithoutReturnableCost</workerClass>
+  </SpecialThingFilterDef>
+
+</Defs>

@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <RecipeDef>
+    <defName>MaintenanceBench_BasicRepair</defName>
+    <uiIconThing>Steel</uiIconThing>
+    <label>basic repair</label>
+    <description>Repair a damaged weapon or piece of apparel in place, restoring up to 25% of its maximum hit points per run. Costs only time. Each run has a small chance to raise the item's quality by one level, up to masterwork.</description>
+    <jobString>Repairing.</jobString>
+    <workerClass>MaintenanceBench.RecipeWorker_Repair</workerClass>
+    <!-- Obrigatório: sem workAmount o jogo lê o WorkToMake de products[0], e a receita não tem produtos. -->
+    <workAmount>2500</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <effectWorking>Smith</effectWorking>
+    <soundWorking>Recipe_Smith</soundWorking>
+    <researchPrerequisite>Smithing</researchPrerequisite>
+    <skillRequirements>
+      <Crafting>3</Crafting>
+    </skillRequirements>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Weapons</li>
+            <li>Apparel</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Weapons</li>
+        <li>Apparel</li>
+      </categories>
+      <!-- O filtro arredonda o HP para centésimos: 0,99 deixa de fora o item a partir de 99,5%. -->
+      <allowedHitPointsPercents>0~0.99</allowedHitPointsPercents>
+    </fixedIngredientFilter>
+    <!-- Valor inicial do filtro da bill, que o jogador edita; o filtro fixo acima continua sendo o limite. -->
+    <defaultIngredientFilter>
+      <categories>
+        <li>Weapons</li>
+        <li>Apparel</li>
+      </categories>
+      <allowedHitPointsPercents>0~0.99</allowedHitPointsPercents>
+    </defaultIngredientFilter>
+    <modExtensions>
+      <li Class="MaintenanceBench.RepairExtension">
+        <hitPointsFraction>0.25</hitPointsFraction>
+        <upgradeChanceMultiplier>0.5</upgradeChanceMultiplier>
+      </li>
+    </modExtensions>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>MaintenanceBench_AdvancedRepair</defName>
+    <uiIconThing>ComponentIndustrial</uiIconThing>
+    <label>advanced repair</label>
+    <description>Repair a damaged weapon or piece of apparel in place, restoring up to 75% of its maximum hit points per run. Consumes a component. Each run has a chance to raise the item's quality by one level, up to masterwork.</description>
+    <jobString>Repairing.</jobString>
+    <workerClass>MaintenanceBench.RecipeWorker_Repair</workerClass>
+    <!-- Obrigatório: sem workAmount o jogo lê o WorkToMake de products[0], e a receita não tem produtos. -->
+    <workAmount>2000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <effectWorking>Smith</effectWorking>
+    <soundWorking>Recipe_Smith</soundWorking>
+    <researchPrerequisite>Machining</researchPrerequisite>
+    <skillRequirements>
+      <Crafting>5</Crafting>
+    </skillRequirements>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Weapons</li>
+            <li>Apparel</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+      <!-- Ingrediente de um só def é "fixo" para o jogo e não passa pela faixa de HP do filtro abaixo. -->
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Weapons</li>
+        <li>Apparel</li>
+      </categories>
+      <!-- O filtro arredonda o HP para centésimos: 0,99 deixa de fora o item a partir de 99,5%. -->
+      <allowedHitPointsPercents>0~0.99</allowedHitPointsPercents>
+    </fixedIngredientFilter>
+    <!-- Valor inicial do filtro da bill, que o jogador edita; o filtro fixo acima continua sendo o limite. -->
+    <defaultIngredientFilter>
+      <categories>
+        <li>Weapons</li>
+        <li>Apparel</li>
+      </categories>
+      <allowedHitPointsPercents>0~0.25</allowedHitPointsPercents>
+    </defaultIngredientFilter>
+    <modExtensions>
+      <li Class="MaintenanceBench.RepairExtension">
+        <hitPointsFraction>0.75</hitPointsFraction>
+        <upgradeChanceMultiplier>1</upgradeChanceMultiplier>
+      </li>
+    </modExtensions>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>MaintenanceBench_ImproveItem</defName>
+    <uiIconThing>ComponentIndustrial</uiIconThing>
+    <label>improve item</label>
+    <description>Work on an undamaged weapon or piece of apparel in place, with a chance to raise its quality by one level. Consumes two components. Lower-quality items are worked on first, and an item just worked on waits an hour before another attempt, so the bill moves on to other items. Reaching legendary requires a crafter with a creativity inspiration, which is consumed, or a production specialist role.</description>
+    <jobString>Improving.</jobString>
+    <workerClass>MaintenanceBench.RecipeWorker_Improve</workerClass>
+    <!-- Obrigatório: sem workAmount o jogo lê o WorkToMake de products[0], e a receita não tem produtos. -->
+    <workAmount>3000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <effectWorking>Smith</effectWorking>
+    <soundWorking>Recipe_Smith</soundWorking>
+    <researchPrerequisite>Machining</researchPrerequisite>
+    <skillRequirements>
+      <Crafting>6</Crafting>
+    </skillRequirements>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Weapons</li>
+            <li>Apparel</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+      <!-- Ingrediente de um só def é "fixo" para o jogo e não passa pelos filtros abaixo. -->
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Weapons</li>
+        <li>Apparel</li>
+      </categories>
+      <!-- O filtro arredonda o HP para centésimos: a partir de 99,5% o item conta como cheio. -->
+      <allowedHitPointsPercents>1~1</allowedHitPointsPercents>
+      <!-- Lendário já está no teto. -->
+      <allowedQualities>Awful~Masterwork</allowedQualities>
+      <!-- Aos pares (armas e roupas): o filtro de qualidade deixa passar item sem qualidade, e o primeiro par o tira;
+           o segundo dá uma espera ao item recém-tentado, para a bill passar pelos demais; o terceiro restringe a
+           busca de ingredientes a um nível de qualidade por vez, do pior para o melhor (ver o patch da busca). -->
+      <specialFiltersToDisallow>
+        <li>MaintenanceBench_AllowWeaponsWithoutQuality</li>
+        <li>MaintenanceBench_AllowApparelWithoutQuality</li>
+        <li>MaintenanceBench_AllowRecentlyImprovedWeapons</li>
+        <li>MaintenanceBench_AllowRecentlyImprovedApparel</li>
+        <li>MaintenanceBench_AllowWeaponsOutsideImprovementTier</li>
+        <li>MaintenanceBench_AllowApparelOutsideImprovementTier</li>
+      </specialFiltersToDisallow>
+    </fixedIngredientFilter>
+    <!-- Valor inicial do filtro da bill, que o jogador edita; o filtro fixo acima continua sendo o limite. -->
+    <defaultIngredientFilter>
+      <categories>
+        <li>Weapons</li>
+        <li>Apparel</li>
+      </categories>
+      <allowedHitPointsPercents>1~1</allowedHitPointsPercents>
+      <allowedQualities>Awful~Masterwork</allowedQualities>
+    </defaultIngredientFilter>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>MaintenanceBench_Recycle</defName>
+    <uiIconThing>Steel</uiIconThing>
+    <label>recycle</label>
+    <description>Break down a damaged weapon or piece of apparel (by default, at 25% hit points or less), returning part of its crafting materials. A skilled crafter recovers more. Components are never returned.</description>
+    <jobString>Recycling.</jobString>
+    <workerClass>MaintenanceBench.RecipeWorker_Recycle</workerClass>
+    <!-- Obrigatório: sem workAmount o jogo lê o WorkToMake de products[0], e a receita não tem produtos. -->
+    <workAmount>2500</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <effectWorking>Smith</effectWorking>
+    <soundWorking>Recipe_Smith</soundWorking>
+    <researchPrerequisite>Smithing</researchPrerequisite>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Weapons</li>
+            <li>Apparel</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Weapons</li>
+        <li>Apparel</li>
+      </categories>
+      <!-- Limite do que o jogador pode escolher na bill; o padrão da bill é 0 a 25%. -->
+      <allowedHitPointsPercents>0~0.99</allowedHitPointsPercents>
+      <!-- Item sem material a devolver fica de fora; ele continua podendo ser reparado. -->
+      <specialFiltersToDisallow>
+        <li>MaintenanceBench_AllowWeaponsWithoutReturnableCost</li>
+        <li>MaintenanceBench_AllowApparelWithoutReturnableCost</li>
+      </specialFiltersToDisallow>
+    </fixedIngredientFilter>
+    <!-- Valor inicial do filtro da bill, que o jogador edita; o filtro fixo acima continua sendo o limite. -->
+    <defaultIngredientFilter>
+      <categories>
+        <li>Weapons</li>
+        <li>Apparel</li>
+      </categories>
+      <allowedHitPointsPercents>0~0.25</allowedHitPointsPercents>
+    </defaultIngredientFilter>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>MaintenanceBench_RemoveBiocode</defName>
+    <uiIconThing>ComponentSpacer</uiIconThing>
+    <label>remove biocode</label>
+    <description>Remove the biocoding from a weapon or piece of apparel in place, so anyone in the colony can use it. Consumes three components. Persona weapons cannot be processed: removing their code would break their bond.</description>
+    <jobString>Removing biocode.</jobString>
+    <workerClass>MaintenanceBench.RecipeWorker_RemoveBiocode</workerClass>
+    <!-- Obrigatório: sem workAmount o jogo lê o WorkToMake de products[0], e a receita não tem produtos. -->
+    <workAmount>10000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Intellectual</workSkill>
+    <effectWorking>Smith</effectWorking>
+    <soundWorking>Recipe_Smith</soundWorking>
+    <researchPrerequisite>MicroelectronicsBasics</researchPrerequisite>
+    <skillRequirements>
+      <Intellectual>10</Intellectual>
+      <Crafting>3</Crafting>
+    </skillRequirements>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Weapons</li>
+            <li>Apparel</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+      <!-- Ingrediente de um só def é "fixo" para o jogo e não passa pelos filtros abaixo. -->
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Weapons</li>
+        <li>Apparel</li>
+      </categories>
+      <!-- Filtros do Core: só deixam passar item biocodificado. O de armas trata a arma persona como "não
+           biocodificada", então ela também fica de fora. Tem que ser specialFiltersToDisallow, aplicado depois das
+           categorias: ao liberar uma categoria o jogo libera junto os filtros especiais configuráveis dela, e
+           disallowedSpecialFilters seria desfeito. -->
+      <specialFiltersToDisallow>
+        <li>AllowNonBiocodedWeapons</li>
+        <li>AllowNonBiocodedApparel</li>
+      </specialFiltersToDisallow>
+    </fixedIngredientFilter>
+    <!-- As opções de biocode do Core não teriam efeito na bill, porque o filtro fixo já decide; ficam escondidas. -->
+    <forceHiddenSpecialFilters>
+      <li>AllowNonBiocodedWeapons</li>
+      <li>AllowNonBiocodedApparel</li>
+      <li>AllowBiocodedWeapons</li>
+      <li>AllowBiocodedApparel</li>
+    </forceHiddenSpecialFilters>
+    <!-- Valor inicial do filtro da bill, que o jogador edita; o filtro fixo acima continua sendo o limite. -->
+    <defaultIngredientFilter>
+      <categories>
+        <li>Weapons</li>
+        <li>Apparel</li>
+      </categories>
+    </defaultIngredientFilter>
+  </RecipeDef>
+
+</Defs>
