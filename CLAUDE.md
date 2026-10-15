@@ -1,8 +1,9 @@
 # CLAUDE.md
 
-Guia para agentes de IA que trabalham neste repositório. As decisões técnicas com a evidência por trás de cada uma, os
-valores de ajuste, os achados de teste, o histórico e o próximo passo ficam no [`MEMORY.md`](MEMORY.md): leia antes de
-retomar o trabalho e mantenha-o atualizado. O [`README.md`](README.md) descreve o mod para quem joga.
+Guia para agentes de IA que trabalham neste repositório. Como o mod funciona hoje (regras, implementação, valores e o
+porquê de cada escolha) está no [`MEMORY.md`](MEMORY.md): leia antes de mexer no mod. Ele descreve só o estado atual;
+ao mudar o comportamento, reescreva o trecho correspondente em vez de acrescentar relato, e deixe o histórico para a
+mensagem de commit. O [`README.md`](README.md) descreve o mod para quem joga.
 
 ## O que é este projeto
 
@@ -45,14 +46,13 @@ commitlint.config.js          regras dos commits
 - **Idioma:** defs em inglês; tradução PT-BR em `Languages/PortugueseBrazilian/DefInjected/`. O mod não tem textos
   `Keyed`; mensagens de erro do C#, comentários e documentação em português. Termos da tradução oficial do jogo: bill
   é "tarefa", HP é "pontos de vida", biocode é "biocodificação", a inspiração de criatividade é "artista".
-- **Textura:** a bancada usa a da mesa de usinagem (`TableMachining`); arte própria está fora de escopo.
+- **Textura:** a bancada usa a da mesa de usinagem (`TableMachining`).
 
 ## Como trabalhar
 
 - **Ciclo:** `bun run build`, `bun run test`, `bun run copy`; então o Rodrigo reinicia o RimWorld e valida em jogo.
   DLL e defs só são lidos ao abrir o jogo.
-- **Validação em jogo é do Rodrigo.** Uma mudança só conta como pronta depois do OK dele em jogo; registre o
-  resultado no `MEMORY.md`.
+- **Validação em jogo é do Rodrigo.** Uma mudança só conta como pronta depois do OK dele em jogo.
 - **Testado vs. lido:** ao relatar, separe o que foi executado (comando, teste, jogo) do que foi só lido (código
   descompilado, XML) e do que não foi verificado. Conclusão de leitura de código não é "confirmado".
 - **Testes automatizados** cobrem só lógica pura, em classes sem tipos do jogo (`RepairMath`, `RecycleMath`,
