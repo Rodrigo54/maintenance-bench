@@ -1,11 +1,16 @@
-# Maintenance Bench — ideia inicial
+# MEMORY.md — Maintenance Bench
 
-Mod para RimWorld 1.7. Nome no jogo: **Maintenance Bench**; tradução PT-BR: **Bancada de manutenção**.
+Memória do projeto: conceito e regras de jogo fechadas, decisões técnicas com a evidência por trás de cada uma,
+valores de ajuste, achados de teste, histórico do roteiro e o próximo passo. Comandos, ambiente de teste e convenções
+estão no [`CLAUDE.md`](CLAUDE.md). As regras foram fechadas na entrevista de 13/10/2026; até 15/10/2026 este conteúdo
+ficava no `IDEA.md`, dividido então entre `README.md`, `CLAUDE.md` e este arquivo.
 
-Este documento registra o conceito, as regras fechadas na entrevista de 13/10/2026, as decisões técnicas com a
-evidência por trás de cada uma, a estrutura do projeto e a validação combinadas na entrevista de implementação
-(também 13/10/2026), as pendências e o roteiro de implementação. O que já foi validado em jogo está marcado no
-roteiro.
+## Estado atual
+
+**Próximo passo (15/10/2026):** o roteiro de implementação está completo: as etapas 1 a 9, a ordem por qualidade da
+melhoria e o reparo avançado nascendo com 0 a 25% estão validados em jogo. O repositório git foi criado em
+15/10/2026. O que vier agora sai de "Fora de escopo por enquanto" (Workshop, arte própria, suporte ao 1.6) e depende
+de decisão do Rodrigo.
 
 ## Conceito
 
@@ -139,8 +144,8 @@ cor, estilo, arte gravada, traits e dados de outros mods. O Tinkering Bench recr
   termina com sucesso.
 - **Consequência aceita:** o item fica em cima da bancada ao terminar. O modo "levar para o estoque" da bill
   não se aplica; o item segue pelo transporte normal depois.
-- **Hipótese:** o fluxo completo funcionar em jogo como o código sugere. O MendAndRecycle prova que reparo no
-  lugar funciona, mas por outro caminho (job próprio e um patch Harmony).
+- **Confirmado em jogo na etapa 3:** o fluxo funciona como o código sugeria (ver Achados de teste). O MendAndRecycle
+  faz reparo no lugar por outro caminho (job próprio e um patch Harmony).
 
 ### Chamadas usadas para cada alteração
 
@@ -296,31 +301,8 @@ item, coloca os materiais perto da bancada e então destrói o item. Nada disso 
 - **Idioma:** defs em inglês, com tradução PT-BR na pasta de idioma desde a primeira versão.
 - **Textura:** a bancada reaproveita a arte de uma mesa do jogo base na primeira versão.
 
-## Estrutura do projeto e validação
+### Decisões de validação (13/10/2026)
 
-Segue o núcleo do padrão dos mods de Stellaris (`D:\dev\stellaris-mods\sagittarius-species`). `docs/` e `steam-workshop/` ficam de fora por enquanto.
-
-- **Repositório (15/10/2026):** `github.com/Rodrigo54/maintenance-bench`, público, licença MIT. GitFlow com `main` e
-  `develop`. A DLL compilada (`mod/maintenance-bench/Assemblies/`) fica fora do git; `bun run build` gera de novo.
-- **Commits:** a mesma convenção do sagittarius-species, Conventional Commits com emoji obrigatório por tipo
-  (`✨ feat(escopo): descrição`) e sem trailer de coautoria de IA. O `commitlint.config.js` foi copiado de lá; o hook
-  `commit-msg` fica em `scripts/git-hooks/` e o `bun install` o instala em `.git/hooks/` (script `prepare`).
-
-```
-mod/maintenance-bench/        o entregável: About, Defs, Languages, Assemblies
-src/MaintenanceBench/         projeto do mod (net10.0), compila para mod/maintenance-bench/Assemblies
-tests/MaintenanceBench.Tests/ xUnit da lógica pura
-scripts/copy.ps1              apaga e recopia o mod em RimWorld\Mods\maintenance-bench (robocopy)
-scripts/tools/                apoio à análise, rodados à mão com `pwsh -NoProfile -File`
-scripts/git-hooks/             hooks versionados (commit-msg com commitlint)
-scripts/install-git-hooks.ts  copia os hooks para .git/hooks (bun run hooks)
-MaintenanceBench.sln
-commitlint.config.js          regras dos commits
-package.json                  bun run build | copy | test | hooks
-.env / .env.example           RIMWORLD_PATH, HARMONY_PATH
-```
-
-- **Identidade:** `packageId` `rodrigo54.maintenancebench`, autor Rodrigo54.
 - **Testes automatizados:** só a lógica pura, em classes sem dependência de tipos do jogo: a fatia de HP
   devolvida, a probabilidade de a rolagem acontecer (multiplicador × fração de HP) e a curva de retorno da
   reciclagem. O que toca o jogo é validado em jogo.
@@ -333,26 +315,7 @@ package.json                  bun run build | copy | test | hooks
 - **Valores de ajuste fino:** uma tabela provisória, com referência no jogo base e no Tinkering Bench, é aprovada em
   lote antes da etapa 3; a etapa 9 só ajusta.
 
-### Ferramentas e ambiente de teste
-
-- **Ciclo de trabalho:** `bun run build`, `bun run test`, `bun run copy`, e então o Rodrigo reinicia o RimWorld e
-  valida em jogo. DLL e defs só são lidos ao abrir o jogo.
-- **Mods:** gerenciados pelo RimPy (`D:\RimPy_Windows`). O perfil `maintenance-bench` (Harmony, Core, DLCs e o mod) está em
-  `%USERPROFILE%\AppData\LocalLow\RimPy Mod Manager\ModLists\maintenance-bench.xml`. O Rodrigo também testa em
-  saves próprios com a lista completa de mods.
-- **Log do jogo:** `%USERPROFILE%\AppData\LocalLow\Ludeon Studios\RimWorld by Ludeon Studios\Logs\Player.log` (a
-  sessão anterior fica em `Player-prev.log`). `scripts/tools/summarize-log.ps1` agrupa os erros e avisos com a
-  origem de cada um.
-- **Ações de debug usadas na validação** (menu em inglês): Spawning → `Spawn thing`; General → `10 damage`,
-  `300 damage`, `Set quality`, `Finish all research`; Pawns → `Set skill`, `Inspiration` → `Inspired_Creativity`.
-  God mode fica na barra do modo dev.
-- **Código do jogo:** `ilspycmd -p -o <pasta> "D:\SteamLibrary\steamapps\common\RimWorld\Assembly-CSharp.dll"`
-  descompila o jogo para consulta; a pasta não faz parte do projeto.
-- **Outros scripts:** `find-costless-items.ps1` lista as armas e roupas sem custo de fabricação (base do filtro da
-  reciclagem); `vanilla-references.ps1` extrai custo, energia e tempo de bancadas e receitas do jogo base (base da
-  etapa 9).
-
-## Pendências
+## Valores, achados e escopo
 
 ### Valores de ajuste (aprovados em 14/10/2026, revistos e validados em jogo na etapa 9 em 15/10/2026)
 
@@ -372,7 +335,7 @@ Os valores marcados com *etapa 9* foram mudados pelo Rodrigo depois dos testes; 
 | Remoção de biocode | 10000, Intellectual 10 e Crafting 3 | Tinkering Bench: 15000, com as mesmas skills |
 | Ícones das receitas (*etapa 9*; antes placeholder) | `uiIconThing`: reparo simples e reciclagem `Steel`; reparo avançado e melhoria `ComponentIndustrial`; remoção de biocode `ComponentSpacer` | Sem produto, a receita não tem ícone e o menu "Adicionar tarefa" mostra um placeholder (`FloatMenuOption`, leitura de código). O jogo base faz igual no abate (`Meat_Muffalo`) e no desmonte de mecanoide (`Steel`). |
 
-### A confirmar em teste
+### Achados de teste
 
 - **Carregamento do DLL:** *confirmado em jogo* — o DLL `net10.0` carrega no 1.7 sem ajustes.
 - **Fluxo no lugar:** *confirmado em jogo* — o reparo simples devolve 25% do HP por execução, a bill termina
@@ -403,7 +366,8 @@ Os valores marcados com *etapa 9* foram mudados pelo Rodrigo depois dos testes; 
   `PawnGenerator.PostProcessGeneratedGear` gera o equipamento de pawns inimigos com HP sorteado por
   `gearHealthRange`. A premissa da melhoria de item se mantém para as armas em uso pela colônia.
 - **Exclusão da arma persona:** pela leitura dos workers de filtro, o filtro de biocode do jogo já cobre (ver
-  Chamadas usadas para cada alteração). A confirmação em jogo fica para a etapa 7.
+  Chamadas usadas para cada alteração). Confirmado em jogo na etapa 7: a arma persona não
+  aparece como ingrediente.
 
 ### Fora de escopo por enquanto
 
@@ -412,15 +376,9 @@ Os valores marcados com *etapa 9* foram mudados pelo Rodrigo depois dos testes; 
 - Publicação na Workshop.
 - Remoção de vínculo de arma persona.
 
-## Roteiro de implementação
+## Histórico do roteiro
 
-Cada etapa só começa depois que a anterior foi validada em jogo.
-
-**Próximo passo (15/10/2026):** o roteiro está completo: as etapas 1 a 9, a ordem por qualidade da melhoria e o
-reparo avançado nascendo com 0 a 25% estão validados em jogo. O que vier agora sai de "Fora de escopo por enquanto"
-(Workshop, arte própria, suporte ao 1.6) e depende de decisão do Rodrigo. O repositório git foi criado em 15/10/2026.
-Lembrete: o `bun run copy` precisa do RimWorld fechado; com o jogo aberto o DLL fica travado e a cópia falha no
-meio, deixando a pasta do mod no jogo incompleta.
+Cada etapa só começou depois que a anterior foi validada em jogo.
 
 **XP no nível 20 não é bug do mod:** no teste da etapa 5 o crafter caiu de 20 para 19,89. O mod não mexe em skill;
 é o decaimento do jogo (`SkillRecord.Interval`): no nível 20 a skill perde 12 XP a cada 200 ticks (3600 por dia),
@@ -429,7 +387,7 @@ negativo até trabalhando. O `Set skill` do debug põe só metade da barra (1500
 vem em poucos dias. Para validar ganho de XP, usar colono com skill abaixo de 10, que não decai.
 
 1. **Instalar o SDK do .NET 10.** Valida: `dotnet --list-sdks` mostra uma versão 10. *Feito: `10.0.402`.*
-2. **Esqueleto do mod e script de build.** A estrutura de "Estrutura do projeto e validação", com `About.xml`,
+2. **Esqueleto do mod e script de build.** A estrutura descrita no `CLAUDE.md`, com `About.xml`,
    projeto C# vazio em `net10.0`, projeto de teste e `scripts/copy.ps1`. Valida: `bun run build`, `test` e `copy`
    passam, o mod aparece na lista do jogo e carrega sem erro no log. *Validada em jogo.*
 3. **Bancada e reparo simples.** Def da bancada, energia opcional e a primeira receita no lugar, com a tabela de
